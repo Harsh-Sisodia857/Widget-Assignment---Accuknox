@@ -19,12 +19,12 @@
         "name": "Game Dashboard",
         "widgets": [
           {
-            "id": 1,
+            "id": 11,
             "name": "Widget 1",
             "text": "Random Text 1"
           },
           {
-            "id": 2,
+            "id": 21,
             "name": "Widget 2",
             "text": "Random Text 2"
           }
@@ -34,12 +34,12 @@
         "name": "Classroom Dashboard",
         "widgets": [
           {
-            "id": 1,
+            "id": 14,
             "name": "Widget 1",
             "text": "Random Text 1"
           },
           {
-            "id": 2,
+            "id": 25,
             "name": "Widget 2",
             "text": "Random Text 2"
           }
