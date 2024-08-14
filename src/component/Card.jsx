@@ -2,12 +2,14 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { removeWidget } from "../store/slice/widgetSlice";
 import { AiOutlineClose } from "react-icons/ai";
+import { toast } from 'react-toastify';
 
 function Card({ category, widget, openAddWidgetModal }) {
   const dispatch = useDispatch();
   const handleDelete = (categoryId, widgetId) => {
     console.log(categoryId, widgetId)
     dispatch(removeWidget({ categoryId, widgetId }));
+    toast("Widget Deleted Successfully !!")
   };
 
   return (

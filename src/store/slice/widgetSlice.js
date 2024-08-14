@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import widgetData from "../../data.json";
+import { toast } from 'react-toastify';
 
 const initialState = {
   widget: widgetData.categories,
@@ -15,17 +16,12 @@ export const widgetSlice = createSlice({
         widgets: [],
       });
     },
-    getWidget : (state,action) =>{
-        const categoryName = action.payload
-        const category = state.widget.filter((cat) => cat.name == categoryName);
-        return category
-    },
     addWidget: (state, action) => {
       const { categoryName, widget } = action.payload;
       const category = state.widget.find((cat) => cat.name === categoryName);
       if (category) {
         category.widgets.push({
-          id: new Date().getTime(), 
+          id: new Date().getTime(),
           name: widget.name,
           text: widget.text,
         });
@@ -33,13 +29,55 @@ export const widgetSlice = createSlice({
     },
     removeWidget: (state, action) => {
       const { categoryId, widgetId } = action.payload;
+      console.log(categoryId, widgetId)
       const category = state.widget.find((cat) => cat.name === categoryId);
       if (category) {
         category.widgets = category.widgets.filter((w) => w.id !== widgetId);
       }
     },
+    searchWidget: (state, action) => {
+      const searchTerm = action.payload.toLowerCase();
+      if (searchTerm.length == 0) {
+        state.widget = widgetData.categories;
+        return;
+      }
+      const results = widgetData.categories
+        .map((category) => {
+          const filteredWidgets = category.widgets.filter(
+            (widget) =>
+              widget.name.toLowerCase().includes(searchTerm) ||
+              widget.text.toLowerCase().includes(searchTerm)
+          );
+          if (filteredWidgets.length > 0) {
+            return {
+              name: category.name,
+              widgets: filteredWidgets,
+            };
+          }
+          return null;
+        })
+        .filter((category) => category !== null);
+
+      console.log(results);
+      state.widget = results;
+    },
+    setCategory: (state, action) => {
+      const { category, widget } = action.payload;
+      state.widget = [
+        {
+          name: category,
+          widgets: widget,
+        },
+      ];
+    },
   },
 });
 
-export const { addCategory, addWidget, removeWidget } = widgetSlice.actions;
+export const {
+  addCategory,
+  addWidget,
+  removeWidget,
+  searchWidget,
+  setCategory,
+} = widgetSlice.actions;
 export default widgetSlice.reducer;

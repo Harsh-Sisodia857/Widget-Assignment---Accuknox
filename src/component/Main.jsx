@@ -4,6 +4,7 @@ import { addCategory, addWidget } from "../store/slice/widgetSlice";
 import Card from "./Card";
 import Modal from "./Modal"; 
 import LeftModal from "./LeftModal";
+import {toast} from 'react-toastify';
 
 function Main() {
   const dispatch = useDispatch();
@@ -38,9 +39,7 @@ function Main() {
   };
 
   const saveWidget = () => {
-    console.log("Widget Name:", widgetName);
-    console.log("Widget Text:", widgetText);
-    console.log("Widget Category:", widgetCategory);
+    
     const existingCategory = widgetData.find(
       (category) => category.name === widgetCategory
     );
@@ -61,7 +60,9 @@ function Main() {
         })
       );
     }
+
     closeModal();
+    toast("Widget Saved !!")
   };
 
   return (

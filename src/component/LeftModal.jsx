@@ -3,6 +3,7 @@ import Button from "./Button";
 import { useDispatch, useSelector } from "react-redux";
 import { removeWidget } from "../store/slice/widgetSlice";
 import ToggleCheckbox from "./ToggleCheckbox";
+import { toast } from 'react-toastify';
 
 function LeftModal({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -43,12 +44,16 @@ function LeftModal({ isOpen, onClose }) {
   };
 
   const handleConfirm = () => {
+    if(selectedWidget.length <= 0){
+      toast("Please Select any Widget to delete !!")
+      return;
+    }
     selectedWidget.forEach((widgetId) => deleteWidget(widgetId));
+    toast("Selected widget Deleted Successfully !!")
     onClose();
   };
 
   const deleteWidget = (widgetId) => {
-    console.log(selectedTab, widgetId)
     dispatch(removeWidget({ categoryId: selectedTab, widgetId: widgetId }));
   };
 
