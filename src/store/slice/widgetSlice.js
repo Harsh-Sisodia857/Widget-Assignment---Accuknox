@@ -29,7 +29,6 @@ export const widgetSlice = createSlice({
     },
     removeWidget: (state, action) => {
       const { categoryId, widgetId } = action.payload;
-      console.log(categoryId, widgetId)
       const category = state.widget.find((cat) => cat.name === categoryId);
       if (category) {
         category.widgets = category.widgets.filter((w) => w.id !== widgetId);
@@ -41,7 +40,7 @@ export const widgetSlice = createSlice({
         state.widget = widgetData.categories;
         return;
       }
-      const results = widgetData.categories
+      const results = state.widget
         .map((category) => {
           const filteredWidgets = category.widgets.filter(
             (widget) =>
@@ -58,7 +57,6 @@ export const widgetSlice = createSlice({
         })
         .filter((category) => category !== null);
 
-      console.log(results);
       state.widget = results;
     },
     setCategory: (state, action) => {
@@ -70,6 +68,11 @@ export const widgetSlice = createSlice({
         },
       ];
     },
+    deleteCategory : (state,action) =>{
+      const {categoryName} = action.payload;
+      console.log(categoryName)
+      state.widget = state.widget.filter((cat) => cat.name != categoryName)
+    }
   },
 });
 
@@ -79,5 +82,6 @@ export const {
   removeWidget,
   searchWidget,
   setCategory,
+  deleteCategory
 } = widgetSlice.actions;
 export default widgetSlice.reducer;

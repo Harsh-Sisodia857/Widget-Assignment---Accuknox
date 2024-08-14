@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeWidget } from "../store/slice/widgetSlice";
+import { removeWidget,deleteCategory } from "../store/slice/widgetSlice";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from 'react-toastify';
 
@@ -12,9 +12,20 @@ function Card({ category, widget, openAddWidgetModal }) {
     toast("Widget Deleted Successfully !!")
   };
 
+  const handleDeleteCategory = (categoryName) =>{
+    dispatch(deleteCategory({categoryName : categoryName}))
+    toast("Category Deleted Successfully !!")
+  }
+
   return (
     <div className="mb-6">
-      <h1 className="text-xl font-semibold mb-4">{category}</h1>
+      <h1 className="text-xl font-semibold mb-4">
+        <div className="flex items-baseline justify-start">
+          <div>{category}</div>
+          <div className="pt-2 ml-3 text-red-500 hover:text-red-700 cursor-pointer" onClick={() => handleDeleteCategory(category)}><AiOutlineClose size={20} /></div>
+        </div>
+         
+      </h1>
       <div className="grid grid-cols-3 gap-4">
         {widget.map((wid) => (
           <div key={wid.id} className="bg-gray-100 p-4 rounded-lg shadow-md relative">

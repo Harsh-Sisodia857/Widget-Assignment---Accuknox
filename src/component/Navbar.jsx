@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaSearch } from "react-icons/fa";
-import { searchWidget, setCategory } from "../store/slice/widgetSlice";
+import { searchWidget } from "../store/slice/widgetSlice";
 
 function Navbar() {
   const [searchTerm, setSearchTerm] = useState("");
