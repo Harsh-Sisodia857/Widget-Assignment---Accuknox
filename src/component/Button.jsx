@@ -5,9 +5,9 @@ function Button({text, handleClick, selectedTab}) {
   console.log(selectedTab, text)
   return (
     <button
-      className={`w-[40%] h-[50px] rounded-sm border-[0.5px] px-4 text-[12px] font-medium text-[#6B6B6B] hover:border-[#FFFFFF] hover:bg-[#FFFFFF]  ${
+      className={`w-[33%] h-[50px] rounded-sm border-[0.5px] px-4 text-[12px] font-medium text-[#6B6B6B] hover:border-[#FFFFFF] hover:bg-[#FFFFFF]  ${
         active ? "border-[#FFFFFF]] bg-[#FFFFFF] text-green-600" : ""
-      } hover:text-black font-semibold text-[14px]`}
+      } ${text == "+" ? "text-2xl" : "font-semibold text-[14px]"} hover:text-black`}
       onClick={() => handleClick(text)}
     >
       {text}

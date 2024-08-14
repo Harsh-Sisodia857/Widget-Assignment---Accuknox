@@ -5,7 +5,7 @@ import { removeWidget } from "../store/slice/widgetSlice";
 import ToggleCheckbox from "./ToggleCheckbox";
 import { toast } from 'react-toastify';
 
-function LeftModal({ isOpen, onClose }) {
+function LeftModal({ isOpen, onClose, handleAddCategory }) {
   if (!isOpen) return null;
 
   const [selectedTab, setSelectedTab] = useState("");
@@ -57,9 +57,10 @@ function LeftModal({ isOpen, onClose }) {
     dispatch(removeWidget({ categoryId: selectedTab, widgetId: widgetId }));
   };
 
+  
   return (
     <div className="fixed right-0 top-0 h-full w-[40%] bg-white shadow-lg z-50 flex flex-col p-4">
-      <div className="flex">
+      <div className="flex flex-wrap">
         {widget.map((wid) => (
           <Button
             key={wid.name}
@@ -68,6 +69,12 @@ function LeftModal({ isOpen, onClose }) {
             handleClick={handleTabChange}
           />
         ))}
+            <Button
+              selectedTab={selectedTab}
+              text={"+"}
+              handleClick={handleAddCategory}
+            />
+
       </div>
 
       <div className="flex flex-col my-3 mx-4 p-3">

@@ -20,6 +20,11 @@ function Main() {
     setLeftModalOpen(true);
   };
 
+  const handleAddCategory = () => {
+      setIsModalOpen(true)
+      
+  } 
+
   const closeLeftModal = () => {
     setLeftModalOpen(false);
   };
@@ -75,7 +80,7 @@ function Main() {
         >
           + Add Category
         </button>
-        <LeftModal isOpen={leftModalOpen} onClose={closeLeftModal}/>
+        <LeftModal isOpen={leftModalOpen} onClose={closeLeftModal} handleAddCategory={handleAddCategory}/>
 
         <Modal
           isOpen={isModalOpen}
